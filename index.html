@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MOD MASTER HUB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #121212; color: white; }
+    header { background: #1f1f1f; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 0 10px #00ff99; }
+    h1 { margin: 0; font-size: 22px; color: #00ff99; }
+    .menu { font-size: 26px; cursor: pointer; }
+    .container { padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; max-height: calc(100vh - 200px); overflow-y: auto; }
+    .card { margin: 15px; text-align: center; transition: transform 0.3s; }
+    .card:hover { transform: scale(1.05); }
+    .card img { width: 100px; height: 100px; border-radius: 20px; box-shadow: 0 0 15px #00ff99; }
+    #settingsMenu {display:none; position:fixed; top:60px; right:20px; background:#222; padding:15px; border-radius:8px; box-shadow: 0 0 10px #00ff99;}
+    button { margin:5px; padding:10px 15px; border:none; border-radius:5px; cursor:pointer; background:#00ff99; color:#000; font-weight:bold;}
+    input { padding:10px; width:80%; margin-bottom:10px; border-radius:5px; border:1px solid #00ff99;}
+    .panel { padding: 20px; max-height: calc(100vh - 100px); overflow-y: auto; }
+    table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+    th, td { padding: 10px; border: 1px solid #00ff99; text-align: center; }
+    .share { font-size: 22px; cursor: pointer; margin-left: 10px; }
+    .bottom-bar { position: fixed; bottom: 0; width: 100%; background: #1f1f1f; display: flex; justify-content: space-around; align-items: center; padding: 10px 0; box-shadow: 0 0 10px #00ff99; z-index: 999; }
+    .bottom-btn { background: #121212; padding: 12px; border-radius: 50%; box-shadow: 0 0 10px #00ff99; cursor: pointer; transition: 0.3s; }
+    .bottom-btn:hover { transform: scale(1.1); }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>MOD MASTER HUB</h1>
+  <div class="menu" onclick="shareApp()">
+    <img src="https://cdn-icons-png.flaticon.com/512/929/929610.png" width="24" height="24">
+  </div>
+  <div class="share" onclick="toggleSettings()">⋮</div>
+</header>
+
+<!-- Search -->
+<div style="text-align:center; margin:10px;">
+  <input type="text" id="userSearch" placeholder="Search Apps..." onkeyup="filterUserApps()">
+</div>
+
+<!-- User content -->
+<div id="mainContent" class="container"></div>
+
+<!-- Settings Menu -->
+<div id="settingsMenu">
+  <button onclick="toggleTheme()">Dark / Light Mode</button><br>
+  <button onclick="changeLanguage()">Change Language</button><br>
+  <button onclick="terms()">Terms of Service</button><br>
+  <button onclick="privacy()">Privacy Policy</button><br>
+  <button onclick="showAdmin()">Admin Panel</button>
+</div>
+
+<!-- Admin Login -->
+<div id="adminLogin" class="panel" style="display:none;">
+  <h2>Admin Login</h2>
+  <input type="text" id="adminUser" placeholder="Username"><br>
+  <input type="password" id="adminPass" placeholder="Password"><br>
+  <button onclick="loginAdmin()">Login</button>
+  <button onclick="closeAdmin()">Back</button>
+</div>
+
+<!-- Admin Panel -->
+<div id="adminPanel" class="panel" style="display:none;">
+  <h2>Add New App</h2>
+  <input type="text" id="appName" placeholder="App Name"><br>
+  <input type="text" id="iconURL" placeholder="Icon Image URL"><br>
+  <input type="text" id="appLink" placeholder="App Link"><br>
+  <button onclick="addApp()">Add App</button><br><br>
+
+  <h2>Manage Apps</h2>
+  <input type="text" id="searchApp" placeholder="Search App" onkeyup="filterApps()"><br>
+  <table id="appsTable">
+    <thead><tr><th>Icon</th><th>Name</th><th>Link</th><th>Action</th></tr></thead>
+    <tbody id="appsList"></tbody>
+  </table>
+
+  <button onclick="logoutAdmin()">Logout</button>
+</div>
+<br>
+<br>
+<br>
+<br>
+<!-- Bottom bar -->
+<footer class="bottom-bar">
+  <div class="bottom-btn" onclick="goHome()">
+    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946433.png" width="28" height="28">
+  </div>
+  <div class="bottom-btn" onclick="openOwner()">👤</div>
+  <div class="bottom-btn" onclick="openChannel()">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="28" height="28">
+  </div>
+</footer>
+
+<script>
+  function toggleSettings() {
+    const menu = document.getElementById("settingsMenu");
+    menu.style.display = (menu.style.display === "none") ? "block" : "none";
+  }
+
+  function toggleTheme() {
+    if (document.body.style.background === "white") {
+      document.body.style.background = "#121212";
+      document.body.style.color = "white";
+    } else {
+      document.body.style.background = "white";
+      document.body.style.color = "black";
+    }
+  }
+
+  function changeLanguage() {
+    const lang = prompt("Select Language: Urdu / English");
+    if (lang.toLowerCase() === "urdu") {
+      alert("زبان اردو منتخب کر لی گئی ہے۔");
+    } else if (lang.toLowerCase() === "english") {
+      alert("English language selected.");
+    } else {
+      alert("Invalid language.");
+    }
+  }
+
+  function terms() {
+    alert("Terms of Service:\n\nBy using MOD MASTER HUB, you agree to follow our guidelines.");
+  }
+
+  function privacy() {
+    alert("Privacy Policy:\n\nWe respect your privacy. We do not collect any personal data.");
+  }
+
+  function showAdmin() {
+    document.getElementById("mainContent").style.display = "none";
+    document.getElementById("adminLogin").style.display = "block";
+    document.getElementById("settingsMenu").style.display = "none";
+  }
+
+  function closeAdmin() {
+    document.getElementById("adminLogin").style.display = "none";
+    document.getElementById("mainContent").style.display = "flex";
+  }
+
+  function loginAdmin() {
+    const u = document.getElementById("adminUser").value;
+    const p = document.getElementById("adminPass").value;
+    if (u === "admin" && p === "1234") {
+      document.getElementById("adminLogin").style.display = "none";
+      document.getElementById("adminPanel").style.display = "block";
+      loadAdminApps();
+    } else {
+      alert("Wrong Credentials");
+    }
+  }
+
+  function logoutAdmin() {
+    document.getElementById("adminPanel").style.display = "none";
+    document.getElementById("mainContent").style.display = "flex";
+  }
+
+  function addApp() {
+    const name = document.getElementById("appName").value;
+    const iconURL = document.getElementById("iconURL").value;
+    const link = document.getElementById("appLink").value;
+    if (!name || !iconURL || !link) {
+      alert("Please fill all fields.");
+      return;
+    }
+    const apps = JSON.parse(localStorage.getItem("apps") || "[]");
+    apps.push({name, icon: iconURL, link});
+    localStorage.setItem("apps", JSON.stringify(apps));
+    alert("App Added!");
+    document.getElementById("appName").value = "";
+    document.getElementById("iconURL").value = "";
+    document.getElementById("appLink").value = "";
+    loadApps();
+    loadAdminApps();
+  }
+
+  function loadApps() {
+  const apps = JSON.parse(localStorage.getItem("apps") || "[]");
+  const container = document.getElementById("mainContent");
+  container.innerHTML = "";
+  apps.forEach(app => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `
+      <a href="${app.link}" target="_blank" style="text-decoration:none; color:inherit;">
+        <img src="${app.icon}">
+        <h3>${app.name}</h3>
+      </a>
+    `;
+    container.appendChild(div);
+  });
+}
+
+  function loadAdminApps() {
+    const apps = JSON.parse(localStorage.getItem("apps") || "[]");
+    const list = document.getElementById("appsList");
+    list.innerHTML = "";
+    apps.forEach((app, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><img src="${app.icon}" width="50" height="50"></td>
+        <td>${app.name}</td>
+        <td><a href="${app.link}" target="_blank">Open</a></td>
+        <td><button onclick="deleteApp(${index})">Delete</button></td>`;
+      list.appendChild(row);
+    });
+  }
+
+  function deleteApp(index) {
+    const apps = JSON.parse(localStorage.getItem("apps") || "[]");
+    if (confirm("Are you sure to delete this app?")) {
+      apps.splice(index, 1);
+      localStorage.setItem("apps", JSON.stringify(apps));
+      loadApps();
+      loadAdminApps();
+    }
+  }
+
+  function filterApps() {
+    const search = document.getElementById("searchApp").value.toLowerCase();
+    const rows = document.querySelectorAll("#appsList tr");
+    rows.forEach(row => {
+      const name = row.cells[1].innerText.toLowerCase();
+      row.style.display = name.includes(search) ? "" : "none";
+    });
+  }
+
+  function filterUserApps() {
+    const search = document.getElementById("userSearch").value.toLowerCase();
+    const cards = document.querySelectorAll(".card");
+    cards.forEach(card => {
+      const name = card.innerText.toLowerCase();
+      card.style.display = name.includes(search) ? "block" : "none";
+    });
+  }
+
+  function shareApp() {
+    const shareData = { title: 'MOD MASTER HUB', text: 'Download the MOD MASTER HUB app!', url: 'https://example.com/apk-download' };
+    if (navigator.share) {
+      navigator.share(shareData).catch(() => { alert("Sharing failed or cancelled."); });
+    } else {
+      prompt("Copy this link:", shareData.url);
+    }
+  }
+
+  function goHome() { location.reload(); }
+  function openOwner() { window.open("https://wa.me/923367027845", "_blank"); }
+  function openChannel() { window.open("https://example.com/your-channel-link", "_blank"); }
+
+  window.onload = () => { loadApps(); };
+</script>
+
+</body>
+</html>
