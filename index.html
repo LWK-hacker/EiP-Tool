@@ -142,7 +142,7 @@
   function loginAdmin() {
     const u = document.getElementById("adminUser").value;
     const p = document.getElementById("adminPass").value;
-    if (u === "admin" && p === "12340") {
+    if (u === "admin" && p === "admin12340") {
       document.getElementById("adminLogin").style.display = "none";
       document.getElementById("adminPanel").style.display = "block";
       loadAdminApps();
@@ -236,7 +236,7 @@
   }
 
   function shareApp() {
-    const shareData = { title: 'EIP X ', text: 'Download the EIP X app!', url: 'https://example.com/apk-download' };
+    const shareData = { title: 'EIP X ', text: 'Download the EIP X app!', url: 'https://lwk-hacker.github.io/EIP_MODS/' };
     if (navigator.share) {
       navigator.share(shareData).catch(() => { alert("Sharing failed or cancelled."); });
     } else {
