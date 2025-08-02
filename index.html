@@ -1,255 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EIP X 2025</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #121212; color: white; }
-    header { background: #1f1f1f; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 0 10px #00ff99; }
-    h1 { margin: 0; font-size: 22px; color: #00ff99; }
-    .menu { font-size: 26px; cursor: pointer; }
-    .container { padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; max-height: calc(100vh - 200px); overflow-y: auto; }
-    .card { margin: 15px; text-align: center; transition: transform 0.3s; }
-    .card:hover { transform: scale(1.05); }
-    .card img { width: 100px; height: 100px; border-radius: 20px; box-shadow: 0 0 15px #00ff99; }
-    #settingsMenu {display:none; position:fixed; top:60px; right:20px; background:#222; padding:15px; border-radius:8px; box-shadow: 0 0 10px #00ff99;}
-    button { margin:5px; padding:10px 15px; border:none; border-radius:5px; cursor:pointer; background:#00ff99; color:#000; font-weight:bold;}
-    input { padding:10px; width:80%; margin-bottom:10px; border-radius:5px; border:1px solid #00ff99;}
-    .panel { padding: 20px; max-height: calc(100vh - 100px); overflow-y: auto; }
-    table { width: 100%; margin-top: 20px; border-collapse: collapse; }
-    th, td { padding: 10px; border: 1px solid #00ff99; text-align: center; }
-    .share { font-size: 22px; cursor: pointer; margin-left: 10px; }
-    .bottom-bar { position: fixed; bottom: 0; width: 100%; background: #1f1f1f; display: flex; justify-content: space-around; align-items: center; padding: 10px 0; box-shadow: 0 0 10px #00ff99; z-index: 999; }
-    .bottom-btn { background: #121212; padding: 12px; border-radius: 50%; box-shadow: 0 0 10px #00ff99; cursor: pointer; transition: 0.3s; }
-    .bottom-btn:hover { transform: scale(1.1); }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Everything is Possible - A powerful web tool platform for productivity, innovation, and limitless possibilities">
+    <meta name="keywords" content="productivity, tools, innovation, web app, everything possible">
+    <meta name="author" content="Everything is Possible">
+    <meta property="og:title" content="Everything is Possible - Unleash Your Potential">
+    <meta property="og:description" content="A comprehensive platform where innovation meets possibility. Access powerful tools, learn new tricks, and unlock your potential.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <title>Everything is Possible - Unleash Your Potential</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-infinity"></i>
+                <span>Everything is Possible</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#tools" class="nav-link">Tools</a>
+                <a href="#about" class="nav-link">About</a>
+                <div class="nav-auth">
+                    <button class="btn-secondary" onclick="showLoginModal()">Login</button>
+                    <button class="btn-primary" onclick="showSignupModal()">Sign Up</button>
+                </div>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
 
-<header>
-  <h1>EIP X</h1>
-  <div class="menu" onclick="shareApp()">
-    <img src="https://cdn-icons-png.flaticon.com/512/929/929610.png" width="24" height="24">
-  </div>
-  <div class="share" onclick="toggleSettings()">⋮</div>
-</header>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="gradient-text">Everything</span>
+                <span class="typing-text">is Possible</span>
+            </h1>
+            <p class="hero-subtitle">Unleash your potential with our comprehensive platform of powerful tools, innovative solutions, and limitless possibilities.</p>
+            <div class="hero-buttons">
+                <button class="btn-hero-primary" onclick="showSignupModal()">
+                    Get Started <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="btn-hero-secondary" onclick="scrollToSection('features')">
+                    Explore Features <i class="fas fa-play"></i>
+                </button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" data-count="10000">0</span>
+                    <span class="stat-label">Active Users</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-count="50">0</span>
+                    <span class="stat-label">Tools Available</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-count="99">0</span>
+                    <span class="stat-label">Success Rate</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Search -->
-<div style="text-align:center; margin:10px;">
-  <input type="text" id="userSearch" placeholder="Search Apps..." onkeyup="filterUserApps()">
-</div>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Powerful Features</h2>
+                <p class="section-subtitle">Discover what makes everything possible</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Experience blazing-fast performance with our optimized platform that delivers results instantly.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure & Private</h3>
+                    <p>Your data is protected with enterprise-grade security measures and privacy-first design.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Powerful Tools</h3>
+                    <p>Access a comprehensive suite of tools designed to boost your productivity and creativity.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community Driven</h3>
+                    <p>Join a thriving community of innovators sharing tips, tricks, and breakthrough solutions.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Ready</h3>
+                    <p>Seamlessly access all features across devices with our responsive, mobile-first design.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>Limitless Potential</h3>
+                    <p>Break through barriers and unlock infinite possibilities with our innovative platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- User content -->
-<div id="mainContent" class="container"></div>
+    <!-- Tools Section -->
+    <section id="tools" class="tools">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Available Tools</h2>
+                <p class="section-subtitle">Explore our growing collection of powerful tools</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI Assistant</h3>
+                    <p>Intelligent automation and smart recommendations</p>
+                    <span class="tool-status coming-soon">Coming Soon</span>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h3>File Manager</h3>
+                    <p>Upload, organize, and manage your files effortlessly</p>
+                    <span class="tool-status available">Available</span>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Daily Tips</h3>
+                    <p>Discover new tricks and productivity hacks daily</p>
+                    <span class="tool-status available">Available</span>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics</h3>
+                    <p>Track your progress and optimize your workflow</p>
+                    <span class="tool-status coming-soon">Coming Soon</span>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Tutorials</h3>
+                    <p>Learn with step-by-step guides and video tutorials</p>
+                    <span class="tool-status coming-soon">Coming Soon</span>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Support</h3>
+                    <p>Get help from our dedicated support team</p>
+                    <span class="tool-status available">Available</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Settings Menu -->
-<div id="settingsMenu">
-  <button onclick="toggleTheme()">Dark / Light Mode</button><br>
-  <button onclick="changeLanguage()">Change Language</button><br>
-  <button onclick="terms()">Terms of Service</button><br>
-  <button onclick="privacy()">Privacy Policy</button><br>
-  <button onclick="showAdmin()">Admin Panel</button>
-</div>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">About Everything is Possible</h2>
+                    <p>We believe that with the right tools and mindset, everything truly is possible. Our platform is designed to empower individuals and teams to break through limitations and achieve extraordinary results.</p>
+                    <p>From productivity tools to creative solutions, from learning resources to community support - we provide everything you need to turn your vision into reality.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Innovative Solutions</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Community Support</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Continuous Updates</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="visual-element">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Admin Login -->
-<div id="adminLogin" class="panel" style="display:none;">
-  <h2>Admin Login</h2>
-  <input type="text" id="adminUser" placeholder="Username"><br>
-  <input type="password" id="adminPass" placeholder="Password"><br>
-  <button onclick="loginAdmin()">Login</button>
-  <button onclick="closeAdmin()">Back</button>
-</div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i class="fas fa-infinity"></i>
+                        <span>Everything is Possible</span>
+                    </div>
+                    <p>Unleashing potential, one possibility at a time.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Platform</h4>
+                        <a href="#features">Features</a>
+                        <a href="#tools">Tools</a>
+                        <a href="#" onclick="showLoginModal()">Dashboard</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <a href="#" onclick="showContactModal()">Contact</a>
+                        <a href="#">Help Center</a>
+                        <a href="#">Documentation</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <a href="#">Community</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Newsletter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Everything is Possible. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-<!-- Admin Panel -->
-<div id="adminPanel" class="panel" style="display:none;">
-  <h2>Add New App</h2>
-  <input type="text" id="appName" placeholder="App Name"><br>
-  <input type="text" id="iconURL" placeholder="Icon Image URL"><br>
-  <input type="text" id="appLink" placeholder="App Link"><br>
-  <button onclick="addApp()">Add App</button><br><br>
+    <!-- Modals -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('login-modal')">&times;</span>
+            <h2>Welcome Back</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+            <p class="modal-footer">Don't have an account? <a href="#" onclick="switchModal('login-modal', 'signup-modal')">Sign up</a></p>
+        </div>
+    </div>
 
-  <h2>Manage Apps</h2>
-  <input type="text" id="searchApp" placeholder="Search App" onkeyup="filterApps()"><br>
-  <table id="appsTable">
-    <thead><tr><th>Icon</th><th>Name</th><th>Link</th><th>Action</th></tr></thead>
-    <tbody id="appsList"></tbody>
-  </table>
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signup-modal')">&times;</span>
+            <h2>Join Us Today</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                </div>
+                <button type="submit" class="btn-primary">Sign Up</button>
+            </form>
+            <p class="modal-footer">Already have an account? <a href="#" onclick="switchModal('signup-modal', 'login-modal')">Login</a></p>
+        </div>
+    </div>
 
-  <button onclick="logoutAdmin()">Logout</button>
-</div>
-<br>
-<br>
-<br>
-<br>
-<!-- Bottom bar -->
-<footer class="bottom-bar">
-  <div class="bottom-btn" onclick="goHome()">
-    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946433.png" width="28" height="28">
-  </div>
-  <div class="bottom-btn" onclick="openOwner()">👤</div>
-  <div class="bottom-btn" onclick="openChannel()">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="28" height="28">
-  </div>
-</footer>
-
-<script>
-  function toggleSettings() {
-    const menu = document.getElementById("settingsMenu");
-    menu.style.display = (menu.style.display === "none") ? "block" : "none";
-  }
-
-  function toggleTheme() {
-    if (document.body.style.background === "white") {
-      document.body.style.background = "#121212";
-      document.body.style.color = "white";
-    } else {
-      document.body.style.background = "white";
-      document.body.style.color = "black";
-    }
-  }
-
-  function changeLanguage() {
-    const lang = prompt("Select Language: Urdu / English");
-    if (lang.toLowerCase() === "urdu") {
-      alert("زبان اردو منتخب کر لی گئی ہے۔");
-    } else if (lang.toLowerCase() === "english") {
-      alert("English language selected.");
-    } else {
-      alert("Invalid language.");
-    }
-  }
-
-  function terms() {
-    alert("Terms of Service:\n\nBy using EIP X, you agree to follow our guidelines.");
-  }
-
-  function privacy() {
-    alert("Privacy Policy:\n\nWe respect your privacy. We do not collect any personal data.");
-  }
-
-  function showAdmin() {
-    document.getElementById("mainContent").style.display = "none";
-    document.getElementById("adminLogin").style.display = "block";
-    document.getElementById("settingsMenu").style.display = "none";
-  }
-
-  function closeAdmin() {
-    document.getElementById("adminLogin").style.display = "none";
-    document.getElementById("mainContent").style.display = "flex";
-  }
-
-  function loginAdmin() {
-    const u = document.getElementById("adminUser").value;
-    const p = document.getElementById("adminPass").value;
-    if (u === "admin" && p === "admin12340") {
-      document.getElementById("adminLogin").style.display = "none";
-      document.getElementById("adminPanel").style.display = "block";
-      loadAdminApps();
-    } else {
-      alert("Wrong Credentials");
-    }
-  }
-
-  function logoutAdmin() {
-    document.getElementById("adminPanel").style.display = "none";
-    document.getElementById("mainContent").style.display = "flex";
-  }
-
-  function addApp() {
-    const name = document.getElementById("appName").value;
-    const iconURL = document.getElementById("iconURL").value;
-    const link = document.getElementById("appLink").value;
-    if (!name || !iconURL || !link) {
-      alert("Please fill all fields.");
-      return;
-    }
-    const apps = JSON.parse(localStorage.getItem("apps") || "[]");
-    apps.push({name, icon: iconURL, link});
-    localStorage.setItem("apps", JSON.stringify(apps));
-    alert("App Added!");
-    document.getElementById("appName").value = "";
-    document.getElementById("iconURL").value = "";
-    document.getElementById("appLink").value = "";
-    loadApps();
-    loadAdminApps();
-  }
-
-  function loadApps() {
-  const apps = JSON.parse(localStorage.getItem("apps") || "[]");
-  const container = document.getElementById("mainContent");
-  container.innerHTML = "";
-  apps.forEach(app => {
-    const div = document.createElement("div");
-    div.className = "card";
-    div.innerHTML = `
-      <a href="${app.link}" target="_blank" style="text-decoration:none; color:inherit;">
-        <img src="${app.icon}">
-        <h3>${app.name}</h3>
-      </a>
-    `;
-    container.appendChild(div);
-  });
-}
-
-  function loadAdminApps() {
-    const apps = JSON.parse(localStorage.getItem("apps") || "[]");
-    const list = document.getElementById("appsList");
-    list.innerHTML = "";
-    apps.forEach((app, index) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td><img src="${app.icon}" width="50" height="50"></td>
-        <td>${app.name}</td>
-        <td><a href="${app.link}" target="_blank">Open</a></td>
-        <td><button onclick="deleteApp(${index})">Delete</button></td>`;
-      list.appendChild(row);
-    });
-  }
-
-  function deleteApp(index) {
-    const apps = JSON.parse(localStorage.getItem("apps") || "[]");
-    if (confirm("Are you sure to delete this app?")) {
-      apps.splice(index, 1);
-      localStorage.setItem("apps", JSON.stringify(apps));
-      loadApps();
-      loadAdminApps();
-    }
-  }
-
-  function filterApps() {
-    const search = document.getElementById("searchApp").value.toLowerCase();
-    const rows = document.querySelectorAll("#appsList tr");
-    rows.forEach(row => {
-      const name = row.cells[1].innerText.toLowerCase();
-      row.style.display = name.includes(search) ? "" : "none";
-    });
-  }
-
-  function filterUserApps() {
-    const search = document.getElementById("userSearch").value.toLowerCase();
-    const cards = document.querySelectorAll(".card");
-    cards.forEach(card => {
-      const name = card.innerText.toLowerCase();
-      card.style.display = name.includes(search) ? "block" : "none";
-    });
-  }
-
-  function shareApp() {
-    const shareData = { title: 'EIP X ', text: 'Download the EIP X app!', url: 'https://lwk-hacker.github.io/EIP_MODS/' };
-    if (navigator.share) {
-      navigator.share(shareData).catch(() => { alert("Sharing failed or cancelled."); });
-    } else {
-      prompt("Copy this link:", shareData.url);
-    }
-  }
-
-  function goHome() { location.reload(); }
-  function openOwner() { window.open("https://wa.me/923367027845", "_blank"); }
-  function openChannel() { window.open("https://whatsapp.com/channel/0029VagXoSB05MUf3KNDz627", "_blank"); }
-
-  window.onload = () => { loadApps(); };
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>

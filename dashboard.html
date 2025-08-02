@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Everything is Possible</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-infinity"></i>
+                <span>Everything is Possible</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#tips" class="nav-link">Tips & Tricks</a>
+                <a href="#files" class="nav-link">Files</a>
+                <a href="#broadcasts" class="nav-link">Updates</a>
+                <a href="#support" class="nav-link">Support</a>
+                <div class="nav-auth">
+                    <span id="user-name">User</span>
+                    <button class="btn-secondary" onclick="Auth.logout()">Logout</button>
+                </div>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <!-- Welcome Section -->
+        <section id="dashboard-section" class="dashboard-section active">
+            <div class="container">
+                <div class="welcome-hero">
+                    <div class="welcome-content">
+                        <h1 class="welcome-title">
+                            Welcome back, <span id="welcome-name">User</span>! 👋
+                        </h1>
+                        <p class="welcome-subtitle">
+                            Ready to discover new possibilities? Explore the latest tips, updates, and tools designed to enhance your productivity.
+                        </p>
+                        <div class="welcome-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="user-tips-read">0</div>
+                                <div class="stat-label">Tips Explored</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="user-files-accessed">0</div>
+                                <div class="stat-label">Files Accessed</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="user-days-active">0</div>
+                                <div class="stat-label">Days Active</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="welcome-visual">
+                        <div class="floating-icon">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>Quick Actions</h2>
+                    <div class="actions-grid">
+                        <div class="action-card" onclick="UserDashboard.switchSection('tips')">
+                            <div class="action-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>Latest Tips</h3>
+                            <p>Discover productivity hacks and useful tricks</p>
+                        </div>
+                        <div class="action-card" onclick="UserDashboard.switchSection('files')">
+                            <div class="action-icon">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <h3>Downloads</h3>
+                            <p>Access APKs and files shared by admin</p>
+                        </div>
+                        <div class="action-card" onclick="UserDashboard.switchSection('broadcasts')">
+                            <div class="action-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <h3>Updates</h3>
+                            <p>Stay informed with latest announcements</p>
+                        </div>
+                        <div class="action-card" onclick="UserDashboard.switchSection('support')">
+                            <div class="action-icon">
+                                <i class="fas fa-life-ring"></i>
+                            </div>
+                            <h3>Get Support</h3>
+                            <p>Contact us for help and assistance</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-activity">
+                    <h2>What's New</h2>
+                    <div class="activity-grid">
+                        <div class="activity-section">
+                            <h3><i class="fas fa-lightbulb"></i> Latest Tips</h3>
+                            <div id="recent-tips" class="activity-list">
+                                <!-- Recent tips will be loaded here -->
+                            </div>
+                        </div>
+                        <div class="activity-section">
+                            <h3><i class="fas fa-bullhorn"></i> Recent Updates</h3>
+                            <div id="recent-broadcasts" class="activity-list">
+                                <!-- Recent broadcasts will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section id="tips-section" class="dashboard-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1><i class="fas fa-lightbulb"></i> Tips & Tricks</h1>
+                    <p>Boost your productivity with these helpful tips and hacks</p>
+                </div>
+
+                <div class="tips-filters">
+                    <div class="filter-group">
+                        <input type="text" id="tips-search" placeholder="Search tips..." class="search-input">
+                        <select id="tips-category" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="productivity">Productivity</option>
+                            <option value="technology">Technology</option>
+                            <option value="health">Health & Wellness</option>
+                            <option value="creativity">Creativity</option>
+                            <option value="business">Business</option>
+                            <option value="general">General</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="tips-grid" id="tips-grid">
+                    <!-- Tips will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Files Section -->
+        <section id="files-section" class="dashboard-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1><i class="fas fa-download"></i> Available Downloads</h1>
+                    <p>Access files, APKs, and resources shared by our team</p>
+                </div>
+
+                <div class="files-filters">
+                    <div class="filter-group">
+                        <input type="text" id="files-search" placeholder="Search files..." class="search-input">
+                        <select id="files-type" class="filter-select">
+                            <option value="">All Types</option>
+                            <option value="apk">APK Files</option>
+                            <option value="document">Documents</option>
+                            <option value="image">Images</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="files-grid" id="files-grid">
+                    <!-- Files will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Broadcasts Section -->
+        <section id="broadcasts-section" class="dashboard-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1><i class="fas fa-bullhorn"></i> Updates & Announcements</h1>
+                    <p>Stay informed with the latest news and updates</p>
+                </div>
+
+                <div class="broadcasts-list" id="broadcasts-list">
+                    <!-- Broadcasts will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Section -->
+        <section id="support-section" class="dashboard-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1><i class="fas fa-life-ring"></i> Support Center</h1>
+                    <p>Get help and submit your questions or feedback</p>
+                </div>
+
+                <div class="support-content">
+                    <div class="support-form-container">
+                        <div class="support-form-card">
+                            <h2>Contact Support</h2>
+                            <p>Having an issue or question? We're here to help!</p>
+                            
+                            <form id="support-form" class="support-form">
+                                <div class="form-group">
+                                    <label for="support-subject">Subject</label>
+                                    <input type="text" id="support-subject" required>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="support-priority">Priority</label>
+                                        <select id="support-priority">
+                                            <option value="low">Low</option>
+                                            <option value="normal" selected>Normal</option>
+                                            <option value="high">High</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="support-category">Category</label>
+                                        <select id="support-category">
+                                            <option value="general">General Question</option>
+                                            <option value="bug">Bug Report</option>
+                                            <option value="feature">Feature Request</option>
+                                            <option value="account">Account Issue</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="support-message">Message</label>
+                                    <textarea id="support-message" rows="5" required placeholder="Describe your issue or question in detail..."></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn-primary">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="support-info">
+                        <div class="support-info-card">
+                            <h3>Frequently Asked Questions</h3>
+                            <div class="faq-list">
+                                <div class="faq-item">
+                                    <h4>How do I reset my password?</h4>
+                                    <p>Currently, password reset is handled manually. Please contact support with your email address.</p>
+                                </div>
+                                <div class="faq-item">
+                                    <h4>How often are new tips added?</h4>
+                                    <p>We add new tips and tricks regularly, usually several times per week.</p>
+                                </div>
+                                <div class="faq-item">
+                                    <h4>Are the APK files safe?</h4>
+                                    <p>All files shared through our platform are scanned and verified by our admin team.</p>
+                                </div>
+                                <div class="faq-item">
+                                    <h4>How can I suggest a new feature?</h4>
+                                    <p>Use the support form above and select "Feature Request" as the category.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="support-info-card">
+                            <h3>Contact Information</h3>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <div>
+                                        <strong>Email Support</strong>
+                                        <p>Use the form for fastest response</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <strong>Response Time</strong>
+                                        <p>Usually within 24 hours</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <div>
+                                        <strong>Privacy</strong>
+                                        <p>Your information is secure</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Messages History -->
+                <div class="support-history">
+                    <h2>Your Support Messages</h2>
+                    <div id="support-messages-history" class="support-messages-list">
+                        <!-- User's support messages will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Action Button -->
+    <div class="fab" onclick="UserDashboard.showQuickSupport()">
+        <i class="fas fa-question"></i>
+    </div>
+
+    <!-- Quick Support Modal -->
+    <div id="quick-support-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('quick-support-modal')">&times;</span>
+            <h2>Quick Question</h2>
+            <form id="quick-support-form">
+                <div class="form-group">
+                    <label for="quick-question">What's your question?</label>
+                    <textarea id="quick-question" rows="3" required placeholder="Ask a quick question..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
